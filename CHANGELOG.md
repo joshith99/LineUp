@@ -8,20 +8,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Comprehensive README.md with project overview and architecture
-- Quick start guide with installation and setup instructions
-- Project features and tech stack documentation
-- GNU General Public License v3.0 (LICENSE file)
-- License badge in README.md
-- CONTRIBUTION.md with planned features and contribution guidelines
-  - Smart queue system with ETA prediction
-  - Time-slot scheduler
-  - Presence detection
-  - Batch queries support
-  - Chat and notifications
-  - Analytics dashboard
-  - Public display board
-  - Tech improvements roadmap
+- Flask-SocketIO backend server (`server.py`)
+  - Real-time professor status management
+  - Token queue system
+  - WebSocket-based live updates
+- Student web interface
+  - Real-time status display
+  - Token request form
+  - Live queue visualization
+  - Responsive design
+- Professor desktop application (`professor_app.py`)
+  - Tkinter GUI with system tray support
+  - Status update controls
+  - Next token/Clear buttons
+  - Real-time queue monitoring
+  - Minimize to tray functionality
+- Project structure (templates/, static/ directories)
+- Python dependencies (requirements.txt)
+- .gitignore file
 
 ### Changed
 

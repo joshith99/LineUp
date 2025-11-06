@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LineUp - Student Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='student.css') }}">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 LineUp - Queue System</h1>
+            <p class="subtitle">Student Interface</p>
+        </header>
+
+        <!-- Professor Status -->
+        <div class="status-card">
+            <h2>Professor Status</h2>
+            <div id="status" class="status-badge">
+                Connecting...
+            </div>
+        </div>
+
+        <!-- Current Token -->
+        <div class="current-token-card">
+            <h2>Currently Serving</h2>
+            <div id="current-token" class="current-token">
+                <p class="waiting">Waiting...</p>
+            </div>
+        </div>
+
+        <!-- Queue Info -->
+        <div class="queue-info">
+            <h3>Queue Status</h3>
+            <p>Total in queue: <strong id="queue-count">0</strong></p>
+        </div>
+
+        <!-- Request Token Form -->
+        <div class="request-card">
+            <h2>Request a Token</h2>
+            <form id="token-form">
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="type">Query Type:</label>
+                    <select id="type">
+                        <option value="Doubt Clarification">Doubt Clarification</option>
+                        <option value="Project Discussion">Project Discussion</option>
+                        <option value="Lab Work">Lab Work</option>
+                        <option value="Assignment Help">Assignment Help</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">Request Token</button>
+            </form>
+        </div>
+
+        <!-- Queue List -->
+        <div class="queue-card">
+            <h2>Queue</h2>
+            <div id="queue-list" class="queue-list">
+                <p class="empty-queue">Queue is empty</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='student.js') }}"></script>
+</body>
+</html>
