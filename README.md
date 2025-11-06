@@ -1,5 +1,7 @@
 # Professor Availability and Token Queue System
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 A lightweight real-time application to manage professor-student interactions using sockets.
 
 ## 🚀 Overview

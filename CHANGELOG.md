@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive README.md with project overview and architecture
 - Quick start guide with installation and setup instructions
 - Project features and tech stack documentation
+- GNU General Public License v3.0 (LICENSE file)
+- License badge in README.md
 
 ### Changed
 
