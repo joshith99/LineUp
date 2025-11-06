@@ -8,6 +8,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+---
+
+## [0.1.0] - 2025-11-06
+
+### Added
 - Flask-SocketIO backend server (`server.py`)
   - Real-time professor status management
   - Token queue system
