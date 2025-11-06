@@ -13,6 +13,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Project features and tech stack documentation
 - GNU General Public License v3.0 (LICENSE file)
 - License badge in README.md
+- CONTRIBUTION.md with planned features and contribution guidelines
+  - Smart queue system with ETA prediction
+  - Time-slot scheduler
+  - Presence detection
+  - Batch queries support
+  - Chat and notifications
+  - Analytics dashboard
+  - Public display board
+  - Tech improvements roadmap
 
 ### Changed
 
