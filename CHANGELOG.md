@@ -10,6 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 ### Changed
+- Rebranded as self-hosted solution
+- Enhanced README with self-hosting benefits and deployment options
+- Added comprehensive deployment guide in QUICKSTART.md
+  - Local network setup instructions
+  - VPS/public server deployment
+  - Systemd service configuration
+  - Production server setup with gunicorn
+  - Security recommendations
+- Emphasized privacy-first and data ownership approach
 
 ### Deprecated
 
