@@ -21,6 +21,12 @@ The server will start on `http://localhost:5000`
 - Or on mobile/other devices: `http://YOUR_IP:5000`
 
 **For Professor:**
+
+**Option A: Run the Executable (Recommended - No Python needed!)**
+- Simply double-click: `dist/LineUpProfessor.exe`
+- No installation or Python required!
+
+**Option B: Run from Python**
 - Run the desktop app:
   ```bash
   python professor_app.py
@@ -73,11 +79,18 @@ To allow students to access from other devices on the same network:
 
 ## 📦 Creating Executable (.exe)
 
-To package the professor app as a standalone .exe:
+The professor app is already compiled as an executable in `dist/LineUpProfessor.exe`
+
+To rebuild it yourself:
 
 ```bash
 pip install pyinstaller
 pyinstaller --onefile --windowed --name LineUpProfessor professor_app.py
 ```
 
-The .exe will be in the `dist/` folder.
+Or use the build script:
+```bash
+build_exe.bat
+```
+
+The .exe will be in the `dist/` folder and can be distributed to professors without requiring Python installation.

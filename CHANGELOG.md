@@ -26,10 +26,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Enhanced system tray menu with full controls
   - Tray notifications for actions
   - Control status, next token, and clear from tray
+  - Standalone executable build support (.exe)
 - Project structure (templates/, static/ directories)
 - Python dependencies (requirements.txt)
 - .gitignore file
 - QUICKSTART.md with setup and usage instructions
+- Build script for creating executable (build_exe.bat)
 
 ### Changed
 - Enhanced system tray functionality
