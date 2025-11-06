@@ -1,6 +1,15 @@
-# Quick Start Guide
+# Quick Start Guide - Self-Hosted Setup
 
-## 🚀 Running the Application
+## 🏠 Running Your Self-Hosted LineUp Server
+
+### Prerequisites
+- Python 3.10 or higher
+- A server/computer to host (VPS, dedicated server, or local machine)
+- Network access for students to connect
+
+---
+
+## 🚀 Installation
 
 ### 1. Install Dependencies
 ```bash
@@ -12,15 +21,18 @@ pip install -r requirements.txt
 python server.py
 ```
 
-The server will start on `http://localhost:5000`
+The server will start on `http://0.0.0.0:5000` (accessible from network)
 
 ### 3. Access Interfaces
 
 **For Students:**
-- Open browser and go to: `http://localhost:5000`
-- Or on mobile/other devices: `http://YOUR_IP:5000`
+- **Local Network**: `http://YOUR_LOCAL_IP:5000` (e.g., `http://192.168.1.100:5000`)
+- **Public Server**: `http://YOUR_DOMAIN_OR_IP:5000`
+- **Same Machine**: `http://localhost:5000`
 
 **For Professor:**
+- **Desktop App**: Run `python professor_app.py`
+- **Or use compiled .exe** from releases (Windows only)
 
 **Option A: Run the Executable (Recommended - No Python needed!)**
 - Simply double-click: `dist/LineUpProfessor.exe`
@@ -50,17 +62,85 @@ The server will start on `http://localhost:5000`
 4. View live queue
 5. Minimize to system tray to run in background
 
-## 🌐 Network Access
+## 🌐 Network Access (Self-Hosted Setup)
+
+### Local Network Deployment
 
 To allow students to access from other devices on the same network:
 
-1. Find your IP address:
-   - Windows: `ipconfig` (look for IPv4 Address)
-   - Linux/Mac: `ifconfig` or `ip addr`
+1. **Find your server's IP address:**
+   - **Windows**: `ipconfig` (look for IPv4 Address)
+   - **Linux/Mac**: `ifconfig` or `ip addr`
 
-2. Students access: `http://YOUR_IP:5000`
+2. **Configure firewall:**
+   - Allow incoming connections on port 5000
+   - **Windows**: `netsh advfirewall firewall add rule name="LineUp" dir=in action=allow protocol=TCP localport=5000`
+   - **Linux**: `sudo ufw allow 5000/tcp`
 
-3. Make sure firewall allows port 5000
+3. **Students access via:**
+   - `http://YOUR_SERVER_IP:5000`
+   - Example: `http://192.168.1.100:5000`
+
+### VPS/Public Server Deployment
+
+1. **Set up your VPS** (DigitalOcean, Linode, AWS, etc.)
+
+2. **Install dependencies** on the server:
+   ```bash
+   sudo apt update
+   sudo apt install python3 python3-pip
+   pip3 install -r requirements.txt
+   ```
+
+3. **Run with production server** (recommended):
+   ```bash
+   # Install gunicorn
+   pip3 install gunicorn
+   
+   # Run with gunicorn
+   gunicorn --worker-class eventlet -w 1 -b 0.0.0.0:5000 server:app
+   ```
+
+4. **Set up as system service** (auto-start on boot):
+   ```bash
+   # Create systemd service file
+   sudo nano /etc/systemd/system/lineup.service
+   ```
+   
+   Add:
+   ```ini
+   [Unit]
+   Description=LineUp Queue System
+   After=network.target
+
+   [Service]
+   User=your_username
+   WorkingDirectory=/path/to/LineUp
+   ExecStart=/usr/bin/python3 server.py
+   Restart=always
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+   
+   Enable and start:
+   ```bash
+   sudo systemctl enable lineup
+   sudo systemctl start lineup
+   ```
+
+5. **Configure domain (optional):**
+   - Point your domain to server IP
+   - Set up Nginx as reverse proxy
+   - Add SSL certificate (Let's Encrypt)
+
+### Security Recommendations
+
+- ✅ Use HTTPS in production (Let's Encrypt free SSL)
+- ✅ Configure firewall properly
+- ✅ Keep server updated
+- ✅ Use strong passwords if adding authentication
+- ✅ Regular backups of any persistent data
 
 ## 🛠️ Troubleshooting
 

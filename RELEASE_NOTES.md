@@ -1,8 +1,14 @@
 # LineUp v0.1.0 - Initial Release
 
-🎉 First public release of LineUp - Professor Availability and Token Queue System!
+🎉 First public release of LineUp - A Self-Hosted Professor Availability and Token Queue System!
 
 ## ✨ Features
+
+### 🏠 Self-Hosted Solution
+- **Complete data control** - Host on your own server
+- **Privacy-first** - No external dependencies or tracking
+- **Flexible deployment** - VPS, local network, or dedicated server
+- **Open source** - GPL v3 licensed
 
 ### 🔧 Backend Server
 - Real-time Flask-SocketIO server
@@ -31,9 +37,16 @@
 
 ## 📦 Installation
 
-### Server Setup
+### Self-Hosted Setup
 ```bash
+# Clone the repository
+git clone https://github.com/joshith99/LineUp.git
+cd LineUp
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Run the server
 python server.py
 ```
 
