@@ -41,6 +41,8 @@ Thumbs.db
 *.log
 
 # PyInstaller
-*.spec
 build/
 dist/
+
+# Release artifacts
+*.zip
