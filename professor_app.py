@@ -139,10 +139,15 @@ class ProfessorApp:
         """Connect to the server in a separate thread"""
         def connect():
             try:
-                self.sio.connect('http://localhost:5000')
+                self.sio.connect('http://localhost:5000', 
+                               wait_timeout=10,
+                               transports=['websocket', 'polling'])
+                print("Successfully connected to server!")
             except Exception as e:
-                messagebox.showerror("Connection Error", 
-                                   f"Failed to connect to server:\n{e}")
+                error_msg = str(e)
+                print(f"Connection error: {error_msg}")
+                self.root.after(100, lambda msg=error_msg: messagebox.showerror("Connection Error", 
+                                   f"Failed to connect to server:\n{msg}\n\nMake sure the server is running!"))
         
         thread = threading.Thread(target=connect, daemon=True)
         thread.start()

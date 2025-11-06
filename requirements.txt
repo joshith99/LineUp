@@ -4,3 +4,4 @@ python-socketio==5.10.0
 eventlet==0.33.3
 pystray==0.19.5
 Pillow==10.1.0
+websocket-client

@@ -4,7 +4,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key-here'
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 
 # Application State
 state = {
@@ -85,4 +85,4 @@ if __name__ == '__main__':
     print("🚀 Server starting on http://localhost:5000")
     print("📱 Student interface: http://localhost:5000")
     print("👨‍🏫 Professor dashboard: http://localhost:5000/professor")
-    socketio.run(app, host='0.0.0.0', port=5000, debug=True)
+    socketio.run(app, host='0.0.0.0', port=5000, debug=False, allow_unsafe_werkzeug=True)

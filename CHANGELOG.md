@@ -26,8 +26,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Project structure (templates/, static/ directories)
 - Python dependencies (requirements.txt)
 - .gitignore file
+- QUICKSTART.md with setup and usage instructions
 
 ### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+- SocketIO connection issues in professor app
+  - Added websocket-client dependency
+  - Improved connection error handling
+  - Added multiple transport options (websocket, polling)
+- Server configuration for better stability
+  - Changed async_mode to 'threading'
+  - Added allow_unsafe_werkzeug flag
+  - Disabled debug mode for production readiness
+
+### Security
 
 ### Deprecated
 
