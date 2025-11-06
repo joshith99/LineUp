@@ -23,12 +23,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Next token/Clear buttons
   - Real-time queue monitoring
   - Minimize to tray functionality
+  - Enhanced system tray menu with full controls
+  - Tray notifications for actions
+  - Control status, next token, and clear from tray
 - Project structure (templates/, static/ directories)
 - Python dependencies (requirements.txt)
 - .gitignore file
 - QUICKSTART.md with setup and usage instructions
 
 ### Changed
+- Enhanced system tray functionality
+  - Added status submenu in tray (Available/Busy/In Cabin/Unavailable)
+  - Added Next Token and Clear Current options in tray
+  - Added desktop notifications for tray actions
+  - Improved show/hide window behavior
+  - Tray icon persists when showing window
 
 ### Deprecated
 

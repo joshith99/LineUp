@@ -33,8 +33,15 @@ class ProfessorApp:
         # Handle window close
         self.root.protocol("WM_DELETE_WINDOW", self.minimize_to_tray)
         
+        # Start minimized to tray if desired
+        self.start_in_tray = False  # Set to True to start minimized
+        
         # Connect to server
         self.connect_to_server()
+        
+        # Start in tray if configured
+        if self.start_in_tray:
+            self.root.after(100, self.minimize_to_tray)
     
     def setup_socketio(self):
         """Setup SocketIO event handlers"""
@@ -215,12 +222,53 @@ class ProfessorApp:
         draw = ImageDraw.Draw(image)
         draw.ellipse([16, 16, 48, 48], fill='white')
         
+        # Create menu with status options and controls
         menu = pystray.Menu(
-            pystray.MenuItem("Show", self.show_window),
+            pystray.MenuItem("LineUp Professor", None, enabled=False),
+            pystray.Menu.SEPARATOR,
+            pystray.MenuItem("Show Window", self.show_window, default=True),
+            pystray.Menu.SEPARATOR,
+            pystray.MenuItem("Status", pystray.Menu(
+                pystray.MenuItem("Available", lambda: self.set_status_from_tray("Available")),
+                pystray.MenuItem("Busy", lambda: self.set_status_from_tray("Busy")),
+                pystray.MenuItem("In Cabin", lambda: self.set_status_from_tray("In Cabin")),
+                pystray.MenuItem("Unavailable", lambda: self.set_status_from_tray("Unavailable"))
+            )),
+            pystray.MenuItem("Next Token", self.next_token_from_tray),
+            pystray.MenuItem("Clear Current", self.clear_current_from_tray),
+            pystray.Menu.SEPARATOR,
             pystray.MenuItem("Exit", self.quit_app)
         )
         
         self.tray_icon = pystray.Icon("LineUp", image, "LineUp Professor", menu)
+    
+    def set_status_from_tray(self, status):
+        """Update status from system tray"""
+        self.status_var.set(status)
+        if self.sio.connected:
+            self.sio.emit('update_status', {'status': status})
+            self.update_tray_notification(f"Status set to: {status}")
+    
+    def next_token_from_tray(self):
+        """Call next token from system tray"""
+        if self.sio.connected:
+            self.sio.emit('next_token')
+            self.update_tray_notification("Called next token")
+        else:
+            self.update_tray_notification("Not connected to server")
+    
+    def clear_current_from_tray(self):
+        """Clear current token from system tray"""
+        if self.sio.connected:
+            self.sio.emit('clear_current')
+            self.update_tray_notification("Cleared current token")
+        else:
+            self.update_tray_notification("Not connected to server")
+    
+    def update_tray_notification(self, message):
+        """Show notification from tray icon"""
+        if self.tray_icon:
+            self.tray_icon.notify(message, "LineUp Professor")
     
     def minimize_to_tray(self):
         """Minimize to system tray"""
@@ -229,16 +277,16 @@ class ProfessorApp:
             self.create_tray_icon()
             thread = threading.Thread(target=self.tray_icon.run, daemon=True)
             thread.start()
+            # Show notification on first minimize
+            self.root.after(500, lambda: self.update_tray_notification("LineUp is running in system tray"))
     
-    def show_window(self):
+    def show_window(self, icon=None, item=None):
         """Show the window from tray"""
         self.root.deiconify()
         self.root.lift()
-        if self.tray_icon:
-            self.tray_icon.stop()
-            self.tray_icon = None
+        self.root.focus_force()
     
-    def quit_app(self):
+    def quit_app(self, icon=None, item=None):
         """Quit the application"""
         if self.sio.connected:
             self.sio.disconnect()
