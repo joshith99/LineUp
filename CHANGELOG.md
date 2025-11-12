@@ -8,8 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Dark/Light mode toggle in student interface
+  - Toggle button in header with theme icons (🌙/☀️)
+  - CSS variables system for theme management
+  - LocalStorage persistence for theme preference
+  - Smooth color transitions between themes
+  - Mobile-responsive theme toggle
 
 ### Changed
+- Removed gradient backgrounds in favor of solid colors
+- Updated color scheme to use CSS custom properties
+- Improved visual hierarchy with theme-aware colors
+- Enhanced accessibility with better contrast in both themes
 - Rebranded as self-hosted solution
 - Enhanced README with self-hosting benefits and deployment options
 - Added comprehensive deployment guide in QUICKSTART.md
