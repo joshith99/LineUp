@@ -4,11 +4,37 @@
     box-sizing: border-box;
 }
 
+:root {
+    /* Light mode colors */
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --border-color: #e5e7eb;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --accent: #667eea;
+    --accent-hover: #5568d3;
+}
+
+[data-theme="dark"] {
+    /* Dark mode colors */
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --border-color: #404040;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --accent: #7c8adb;
+    --accent-hover: #8b98e6;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--bg-primary);
     min-height: 100vh;
     padding: 20px;
+    color: var(--text-primary);
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -18,30 +44,67 @@ body {
 
 header {
     text-align: center;
-    color: white;
     margin-bottom: 30px;
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 header h1 {
     font-size: 2.5rem;
     margin-bottom: 5px;
+    color: var(--text-primary);
 }
 
 .subtitle {
     font-size: 1.1rem;
-    opacity: 0.9;
+    opacity: 0.8;
+    color: var(--text-secondary);
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 25px;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.theme-toggle-icon {
+    font-size: 1.2rem;
 }
 
 .status-card, .current-token-card, .request-card, .queue-card {
-    background: white;
+    background: var(--bg-secondary);
     border-radius: 15px;
     padding: 25px;
     margin-bottom: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px var(--shadow);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
 }
 
 h2 {
-    color: #333;
+    color: var(--text-primary);
     margin-bottom: 15px;
     font-size: 1.5rem;
 }
@@ -76,31 +139,32 @@ h2 {
 }
 
 .current-token {
-    background: #f3f4f6;
+    background: var(--bg-primary);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    border: 1px solid var(--border-color);
 }
 
 .current-token .token-info {
     font-size: 1.3rem;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .current-token .token-id {
     font-size: 2rem;
     font-weight: bold;
-    color: #667eea;
+    color: var(--accent);
     margin-bottom: 10px;
 }
 
 .waiting {
-    color: #9ca3af;
+    color: var(--text-secondary);
     font-style: italic;
 }
 
 .queue-info {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--accent);
     color: white;
     padding: 15px 25px;
     border-radius: 10px;
@@ -120,38 +184,41 @@ h2 {
 label {
     display: block;
     margin-bottom: 8px;
-    color: #374151;
+    color: var(--text-primary);
     font-weight: 600;
 }
 
 input, select {
     width: 100%;
     padding: 12px;
-    border: 2px solid #e5e7eb;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
     font-size: 1rem;
     transition: border-color 0.3s;
+    background: var(--bg-primary);
+    color: var(--text-primary);
 }
 
 input:focus, select:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: var(--accent);
 }
 
 .btn-submit {
     width: 100%;
     padding: 15px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--accent);
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
 }
 
 .btn-submit:hover {
+    background: var(--accent-hover);
     transform: translateY(-2px);
 }
 
@@ -165,14 +232,19 @@ input:focus, select:focus {
 }
 
 .queue-item {
-    background: #f9fafb;
+    background: var(--bg-primary);
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 8px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid var(--accent);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: all 0.3s ease;
+}
+
+.queue-item:hover {
+    transform: translateX(5px);
 }
 
 .queue-item-info {
@@ -181,17 +253,17 @@ input:focus, select:focus {
 
 .queue-item-name {
     font-weight: bold;
-    color: #1f2937;
+    color: var(--text-primary);
     margin-bottom: 5px;
 }
 
 .queue-item-type {
-    color: #6b7280;
+    color: var(--text-secondary);
     font-size: 0.9rem;
 }
 
 .queue-item-id {
-    background: #667eea;
+    background: var(--accent);
     color: white;
     padding: 8px 15px;
     border-radius: 20px;
@@ -200,7 +272,7 @@ input:focus, select:focus {
 
 .empty-queue {
     text-align: center;
-    color: #9ca3af;
+    color: var(--text-secondary);
     padding: 20px;
     font-style: italic;
 }
@@ -208,6 +280,11 @@ input:focus, select:focus {
 @media (max-width: 600px) {
     header h1 {
         font-size: 2rem;
+    }
+    
+    .theme-toggle {
+        position: static;
+        margin: 0 auto 15px;
     }
     
     .status-card, .current-token-card, .request-card, .queue-card {

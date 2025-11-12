@@ -1,6 +1,35 @@
 // Connect to Socket.IO server
 const socket = io();
 
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const themeText = document.getElementById('themeText');
+const themeIcon = document.querySelector('.theme-toggle-icon');
+
+// Check for saved theme preference or default to light mode
+const currentTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', currentTheme);
+updateThemeButton(currentTheme);
+
+themeToggle.addEventListener('click', () => {
+    const theme = document.documentElement.getAttribute('data-theme');
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeButton(newTheme);
+});
+
+function updateThemeButton(theme) {
+    if (theme === 'dark') {
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Light';
+    } else {
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'Dark';
+    }
+}
+
 // DOM Elements
 const statusEl = document.getElementById('status');
 const currentTokenEl = document.getElementById('current-token');
